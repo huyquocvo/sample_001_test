@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('has title', async ({ page }) => {
+  
   await page.goto('/auth/login/');
 
   // Expect a title "to contain" a substring.
@@ -8,6 +9,7 @@ test('has title', async ({ page }) => {
 });
 
 test('get started link', async ({ page }) => {
+  
   await page.goto('/auth/login/');
 
   // Click the get started link.
