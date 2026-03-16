@@ -2,10 +2,16 @@ import { test, expect } from '@playwright/test';
 
 test('has title', async ({ page }) => {
   
+  const username = process.env.USER_NAME;
+  const password = process.env.PASSWORD;
+  console.log(username);
+  console.log(password);
   await page.goto('/auth/login/');
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Practice Software Testing/);
+  expect(username).toBe("huyvq");
+  expect(password).toBe("abc");
 });
 
 test('get started link', async ({ page }) => {
