@@ -20,12 +20,9 @@ const customer02AuthFile = ".auth/customer02.json";
 
 setup("Create Admin Auth", async ({ page, context }) => {
   const loginPage = new LoginPage(page);
-  //await loginPage.goto();
-  await page.goto('/auth/login/');
-  await page.getByTestId("email").fill(adminEmail);
-  await page.getByTestId("password").fill(adminPassword);
-  await page.getByTestId("login-submit").click();
-  //await loginPage.login(adminEmail, adminPassword);
+  await loginPage.goto();
+
+  await loginPage.login(adminEmail, adminPassword);
   expect(await loginPage.navAdminMenu.innerText()).toContain("John Doe");
 
   await context.storageState({ path: adminAuthFile });
@@ -43,12 +40,9 @@ setup("Create Admin Auth", async ({ page, context }) => {
 
 setup("Create Customer 02 Auth", async ({ page, context }) => {
   const loginPage = new LoginPage(page);
-  //await loginPage.goto();
-  await page.goto('/auth/login/');
-  await page.getByTestId("email").fill(customer02Email);
-  await page.getByTestId("password").fill(customer02Password);
-  await page.getByTestId("login-submit").click();
- // await loginPage.login(customer02Email, customer02Password);
+  await loginPage.goto();
+
+  await loginPage.login(customer02Email, customer02Password);
   expect(await loginPage.navUserMenu.innerText()).toContain("Jack Howe");
 
   await context.storageState({ path: customer02AuthFile });
