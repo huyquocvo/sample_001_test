@@ -6,8 +6,8 @@ test('has title', async ({ page }) => {
   const password = process.env.PASSWORD as string;
 
   await page.goto('/auth/login/');
-  await page.locator("#email").fill(username);
-  await page.locator("#password").fill(password);
+  await page.getByTestId("email").fill(username);
+  await page.getByTestId("password").fill(password);
   await page.locator("//input[@aria-label='Login']").click();
   await page
     .getByRole('listitem')
@@ -16,7 +16,7 @@ test('has title', async ({ page }) => {
   //await expect(page).toHaveTitle(/Practice Software Testing/);
   expect(username).toBe("admin@practicesoftwaretesting.com");
   expect(password).toBe("welcome01");
-  
+
 });
 
 test('get started link', async ({ page }) => {
