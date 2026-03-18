@@ -12,10 +12,10 @@ jobs:
       BASE_URL: ${{vars.BASE_URL}}
       STANDARD_USER: ${{secrets.STANDARD_USER}}
       STANDARD_PASSWORD: ${{secrets.STANDARD_PASSWORD}}
-      ADMIN_USERNAME: ${{secrets.ADMIN_USERNAME}}
-      ADMIN_PASSWORD: ${{secrets.ADMIN_PASSWORD}}
-      CUSTOMER_02_USERNAME: ${{secrets.CUSTOMER_02_USERNAME}}
-      CUSTOMER_02_PASSWORD: ${{secrets.CUSTOMER_02_PASSWORD}}
+      PROBLEM_USER: ${{secrets.PROBLEM_USER}}
+      PROBLEM_PASSWORD: ${{secrets.PROBLEM_PASSWORD}}
+      PERFORMANCE_GLITCH_USER: ${{secrets.PERFORMANCE_GLITCH_USER}}
+      PERFORMANCE_GLITCH_PASSWORD: ${{secrets.PERFORMANCE_GLITCH_PASSWORD}}
     steps:
     - uses: actions/checkout@v6
     - uses: actions/setup-node@v6
