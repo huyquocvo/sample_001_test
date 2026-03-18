@@ -9,20 +9,20 @@ test('has title', async ({ page,context }) => {
   await page.goto('/auth/login/');
   const loginPage = new LoginPage(page);
   await loginPage.login(username, password);
-  expect(await loginPage.navAdminMenu.innerText()).toContain("John Doe");
+  //expect(await loginPage.navAdminMenu.innerText()).toContain("John Doe");
   // await page.getByTestId("email").fill(username);
   // await page.getByTestId("password").fill(password);
   //await page.getByTestId("login-submit").click();
   // await page
   //   .getByRole('listitem')
   //   .filter({ hasText: 'John Doe' }).isVisible();
-    
+    await expect(page.getByRole('button', { name: 'Open Menu' })).toBeVisible();
     const adminAuthFile = ".auth/admin.json";
     await context.storageState({ path: adminAuthFile });
   // Expect a title "to contain" a substring.
   //await expect(page).toHaveTitle(/Practice Software Testing/);
-  expect(username).toBe("admin@practicesoftwaretesting.com");
-  expect(password).toBe("welcome01");
+  // expect(username).toBe("admin@practicesoftwaretesting.com");
+  // expect(password).toBe("welcome01");
 
 });
 test('get started link', async ({ page }) => {

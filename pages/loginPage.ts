@@ -12,9 +12,9 @@ export class LoginPage {
   readonly navSignIn:Locator;
 constructor(private readonly page: Page) 
     {
-    this.username = this.page.getByTestId("email");
+    this.username = this.page.getByTestId("username");
     this.password = this.page.getByTestId("password");
-    this.submit = this.page.getByTestId("login-submit");
+    this.submit = this.page.getByTestId("login-button");
     this.navUserMenu = this.page.getByTestId("nav-menu");
     this.navAdminMenu = this.page.getByTestId("nav-menu");
     this.navSignOut = this.page.getByTestId("nav-sign-out");
@@ -22,7 +22,7 @@ constructor(private readonly page: Page)
     }
   async goto() 
   {
-  await this.page.goto("/auth/login/");
+  await this.page.goto("/");
 
   // Expect a title "to contain" a substring.
   //await expect(this.page).toHaveTitle(/Practice Software Testing/);
