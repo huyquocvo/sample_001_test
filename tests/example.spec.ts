@@ -6,9 +6,9 @@ test('has title', async ({ page,context }) => {
   const username = process.env.USER_NAME as string;
   const password = process.env.PASSWORD as string;
 
-  await page.goto('/auth/login/');
-  const loginPage = new LoginPage(page);
-  await loginPage.login(username, password);
+  await page.goto('/');
+  // const loginPage = new LoginPage(page);
+  // await loginPage.login(username, password);
   //expect(await loginPage.navAdminMenu.innerText()).toContain("John Doe");
   // await page.getByTestId("email").fill(username);
   // await page.getByTestId("password").fill(password);
@@ -17,8 +17,8 @@ test('has title', async ({ page,context }) => {
   //   .getByRole('listitem')
   //   .filter({ hasText: 'John Doe' }).isVisible();
     await expect(page.getByRole('button', { name: 'Open Menu' })).toBeVisible();
-    const adminAuthFile = ".auth/admin.json";
-    await context.storageState({ path: adminAuthFile });
+    // const adminAuthFile = ".auth/admin.json";
+    // await context.storageState({ path: adminAuthFile });
   // Expect a title "to contain" a substring.
   //await expect(page).toHaveTitle(/Practice Software Testing/);
   // expect(username).toBe("admin@practicesoftwaretesting.com");
@@ -28,6 +28,7 @@ test('has title', async ({ page,context }) => {
 test('get started link', async ({ page }) => {
   
   await page.goto('/');
+  await expect(page.getByRole('button', { name: 'Open Menu' })).toBeVisible();
   // Click the get started link.
  // await expect(page.getByRole('heading', { name: 'Login' })).toBeVisible();
 
