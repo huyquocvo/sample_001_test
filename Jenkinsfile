@@ -1,16 +1,42 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'NodeJS 25'  // Make sure this matches your Jenkins NodeJS installation name
+    }
+
     stages {
-        stage('Run tests in Docker') {
+        stage('Checkout') {
             steps {
-                script {
-                    docker.image('mcr.microsoft.com/playwright:v1.45.1-jammy').inside('-u root') {
-                        sh 'npm ci'
-                        sh 'npx playwright test'
-                    }
-                }
+                checkout scm
             }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm ci'
+                sh 'npx playwright install --with-deps'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'npx playwright test'
+            }
+        }
+    }
+
+    post {
+        always {
+            junit 'test-results/junit-report.xml'
+            publishHTML(target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'playwright-report',
+                reportFiles: 'index.html',
+                reportName: 'Playwright Report'
+            ])
         }
     }
 }
