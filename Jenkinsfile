@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 // Check out the source code from your Source Code Management (SCM), e.g., Git
-                checkout scm
+                checkout git
             }
         }
 
