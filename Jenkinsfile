@@ -1,39 +1,36 @@
 pipeline {
-    agent any
-    tools {
-        // Must match the name configured in Global Tool Configuration
-        nodejs 'NodeJS 25' 
+    agent {
+        docker {
+            // Use the official Playwright Docker image with browsers pre-installed
+            image '://mcr.microsoft.com' // Check the [Playwright documentation](https://playwright.dev/docs/ci) for the latest version
+            args '-u root' // Helps with permissions if needed
+        }
     }
     stages {
         stage('Checkout Code') {
             steps {
-                checkout scm
+                checkout scm // Checks out the code from the source control management (SCM)
             }
         }
         stage('Install Dependencies') {
             steps {
-                // Use npm ci for clean and reliable installs in CI environments
-                sh 'npm ci' 
-                // Install Playwright browsers and necessary system dependencies for Linux agents
-                sh 'npx playwright install --with-deps' 
+                sh 'npm ci' // Installs Node.js dependencies
+                // The browsers are already installed in the Docker image, so `npx playwright install` is not strictly necessary here.
             }
         }
-        stage('Run Tests') {
+        stage('Run Playwright Tests') {
             steps {
-                sh 'npx playwright test --headless' // Run tests in headless mode for CI
+                // Run tests in headless mode (default in CI) and generate JUnit and HTML reports
+                sh 'npx playwright test --reporter=junit,html'
             }
         }
     }
     post {
-        // Actions to run after the stages are complete (regardless of success or failure)
         always {
-            // Archive the HTML report for debugging
-            archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
-            // If using JUnit reports, use the junit step
-            // junit 'test-results/junit-report.xml'
-        }
-        failure {
-            echo 'Tests failed! Check the console output and report for details.'
+            // Archive the JUnit test results for Jenkins' built-in reporting
+            junit 'test-results/junit-report.xml' // Update path to match your playwright config output
+            // Archive the Playwright HTML report as a build artifact
+            archiveArtifacts artifacts: 'playwright-report/**/*', allowEmptyArchive: true
         }
     }
 }
