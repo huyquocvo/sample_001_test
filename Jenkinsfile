@@ -10,6 +10,12 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Check NodeJS Installation') {
+            steps {
+                sh 'node -v'
+                sh 'npm -v'
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 // Use npm ci for clean and reliable installs in CI environments
