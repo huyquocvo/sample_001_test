@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         // Must match the name configured in Global Tool Configuration
-        nodejs 'NodeJS 25' 
+        nodejs 'NodeJS 1.6.6' 
     }
     stages {
         stage('Checkout Code') {
