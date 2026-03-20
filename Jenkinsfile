@@ -14,15 +14,14 @@ pipeline {
             }
         }
        // Use post-always or post-failure to ensure results are collected even if tests fail
-            post {
-                always {
-                    // Archive the raw Allure results as artifacts for debugging if needed
-                    archiveArtifacts artifacts: 'allure-results/**/*', fingerprint: true
-                }
+        post {
+            always {
+                // Archive the raw Allure results as artifacts for debugging if needed
+                archiveArtifacts artifacts: 'allure-results/**/*', fingerprint: true
             }
         }
+        }
     }
-
     post {
         always {
             // This step generates and publishes the interactive Allure report
