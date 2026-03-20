@@ -1,43 +1,22 @@
 pipeline {
     agent any
-
-    tools {
-        nodejs 'NodeJS 25'  // Make sure this matches your Jenkins NodeJS installation name
-    }
-
+    tools { nodejs "Node 25" }
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
                 sh 'npm ci'
-                sh 'npx playwright install --with-deps'
+                sh 'npx playwright install'
             }
         }
-
         stage('Run Tests') {
             steps {
-                sh 'npx playwright test'
+                sh 'npx playwright test --reporter=junit'
             }
         }
-    }
-
-    post {
-        always {
-            junit 'test-results/junit-report.xml'
-            publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'playwright-report',
-                reportFiles: 'index.html',
-                reportName: 'Playwright Report'
-            ])
+        stage('Archive Results') {
+            steps {
+                archiveArtifacts artifacts: '**/playwright-report/**', allowEmptyArchive: true
+            }
         }
     }
 }
