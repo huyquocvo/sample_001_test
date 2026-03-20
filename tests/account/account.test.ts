@@ -18,7 +18,6 @@ test.describe("validate with problem user account", () => {
     await expect(page.getByRole('button', { name: 'Open Menu' })).toBeVisible();
   });
 });
-
 test.describe("Validate with performance glitch account", () => {
   test.use({ storageState: ".auth/performance_glitch_user.json" });
   test("Validate with performance glitch account", async ({ page }) => {
