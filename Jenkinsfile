@@ -1,11 +1,11 @@
 pipeline {
-    agent any
-    tools { nodejs "NodeJS 25" }
+    agent {
+        docker { image 'mcr.microsoft.com/playwright:v1.30.0-focal' }
+    }
     stages {
         stage('Install Dependencies') {
             steps {
                 sh 'npm ci'
-                sh 'npx playwright install'
             }
         }
         stage('Run Tests') {
