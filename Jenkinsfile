@@ -1,5 +1,9 @@
 pipeline {
     agent any
+     environment {
+        // Define an environment variable directly
+        BASE_URL = 'https://www.saucedemo.com' 
+    }
     tools { nodejs "NodeJS 25" }
     stages {
         stage('Install Dependencies') {
