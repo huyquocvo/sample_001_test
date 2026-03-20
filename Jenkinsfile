@@ -1,36 +1,43 @@
 pipeline {
-    agent {
-        docker {
-            // Use the official Playwright Docker image with browsers pre-installed
-            image '://mcr.microsoft.com' // Check the [Playwright documentation](https://playwright.dev/docs/ci) for the latest version
-            args '-u root' // Helps with permissions if needed
-        }
+    agent any
+
+    tools {
+        nodejs 'NodeJS 25'  // Make sure this matches your Jenkins NodeJS installation name
     }
+
     stages {
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
-                checkout scm // Checks out the code from the source control management (SCM)
+                checkout scm
             }
         }
+
         stage('Install Dependencies') {
             steps {
-                sh 'npm ci' // Installs Node.js dependencies
-                // The browsers are already installed in the Docker image, so `npx playwright install` is not strictly necessary here.
+                sh 'npm install'
+                sh 'npm ci'
+                sh 'npx playwright install --with-deps'
             }
         }
-        stage('Run Playwright Tests') {
+
+        stage('Run Tests') {
             steps {
-                // Run tests in headless mode (default in CI) and generate JUnit and HTML reports
-                sh 'npx playwright test --reporter=junit,html'
+                sh 'npx playwright test'
             }
         }
     }
+
     post {
         always {
-            // Archive the JUnit test results for Jenkins' built-in reporting
-            junit 'test-results/junit-report.xml' // Update path to match your playwright config output
-            // Archive the Playwright HTML report as a build artifact
-            archiveArtifacts artifacts: 'playwright-report/**/*', allowEmptyArchive: true
+            junit 'test-results/junit-report.xml'
+            publishHTML(target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'playwright-report',
+                reportFiles: 'index.html',
+                reportName: 'Playwright Report'
+            ])
         }
     }
 }
