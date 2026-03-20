@@ -10,12 +10,13 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                bat 'npx playwright test --reporter=junit'
+                bat 'npx playwright test --reporter=html,junit'
             }
         }
         stage('Archive Results') {
             steps {
-                archiveArtifacts artifacts: '*.*/playwright-report/*.*', allowEmptyArchive: true
+                aarchiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
+                junit 'test-results/junit.xml'
             }
         }
     }
