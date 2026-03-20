@@ -13,11 +13,7 @@ pipeline {
                 bat 'npx playwright test --reporter=line,allure-playwright'
             }
         }
-        stage('Archive Results') {
-            steps {
-                archiveArtifacts artifacts: 'allure-results/**/*', fingerprint: true
-            }
-        }
+        
     }
 }
 post {
