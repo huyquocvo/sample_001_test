@@ -18,6 +18,7 @@ test.describe("validate with problem user account", () => {
     await expect(page.getByRole('button', { name: 'Open Menu' })).toBeVisible();
   });
 });
+
 test.describe("Validate with performance glitch account", () => {
   test.use({ storageState: ".auth/performance_glitch_user.json" });
   test("Validate with performance glitch account", async ({ page }) => {
@@ -25,6 +26,7 @@ test.describe("Validate with performance glitch account", () => {
     await expect(page.getByRole('button', { name: 'Open Menu' })).toBeVisible();
   });
 });
+
 test.describe("Validate with error user Auth", () => {
   test.use({ storageState: ".auth/error_user.json" });
   test("Validate with error user account", async ({ page }) => {
@@ -32,6 +34,7 @@ test.describe("Validate with error user Auth", () => {
     await expect(page.getByRole('button', { name: 'Open Menu' })).toBeVisible();
   });
 });
+
 test.describe("Validate with visual user Auth", () => {
   test.use({ storageState: ".auth/visual_user.json" });
   test("Validate with visual user account", async ({ page }) => {
