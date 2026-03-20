@@ -30,8 +30,8 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     # 4. Run tests (must use Allure reporter)
-    - name: Run tests and generate report
-      run: npx allure run -- npm run test
+    - name: Run tests with trace-deprecation
+      run: NODE_OPTIONS="--trace-deprecation" npm run test
       # This generates allure-results/ directory and creates allure-report/ with summary.json
 
     # 5. Post summary to PR
