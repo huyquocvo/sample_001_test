@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Archive Results') {
             steps {
-                archiveArtifacts artifacts: '*.*/playwright-report/*.*', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
             }
         }
     }
