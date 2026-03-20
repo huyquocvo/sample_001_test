@@ -13,13 +13,7 @@ pipeline {
                 bat 'npx playwright test --reporter=line,allure-playwright'
             }
         }
-       /stage('Run Playwright Tests with Allure Reporter') {
-            steps {
-                script {
-                    // This command runs the tests and generates raw Allure results in 'allure-results' directory
-                    sh 'npx playwright test --reporter=line,allure-playwright'
-                }
-            }
+      
             // Use post-always or post-failure to ensure results are collected even if tests fail
             post {
                 always {
