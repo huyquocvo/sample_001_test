@@ -13,21 +13,10 @@ pipeline {
                 bat 'npx playwright test --reporter=line,allure-playwright'
             }
         }
-      
-            // Use post-always or post-failure to ensure results are collected even if tests fail
-        post {
-            always {
-                // Archive the raw Allure results as artifacts for debugging if needed
+        stage('Archive Results') {
+            steps {
                 archiveArtifacts artifacts: 'allure-results/**/*', fingerprint: true
             }
         }
-        }
     }
-
-    post {
-        always {
-            // This step generates and publishes the interactive Allure report
-            // 'results' path must match the output directory configured in playwright.config.ts ('allure-results' by default)
-            allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-        }
-    }
+}
