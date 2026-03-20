@@ -33,7 +33,7 @@ export default defineConfig({
   use: {
      baseURL: process.env.BASE_URL,
    // baseURL: 'https://www.saucedemo.com',
-    headless: true,
+    headless: false,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     actionTimeout: 90 * 500,
