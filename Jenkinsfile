@@ -20,3 +20,13 @@ pipeline {
         }
     }
 }
+post {
+        always {
+            // Publish the Allure Report after the build completes
+            allure includeProperties: false, results: [[path: 'allure-results']]
+            
+            // Optional: Archive the Playwright HTML report (requires HTML Publisher Plugin)
+             publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright HTML Report', reportTitles: ''])
+        }
+    }
+
