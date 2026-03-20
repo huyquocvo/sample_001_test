@@ -20,3 +20,11 @@ pipeline {
         }
     }
 }
+  post {
+        always {
+            // This step generates and publishes the interactive Allure report
+            // 'results' path must match the output directory configured in playwright.config.ts ('allure-results' by default)
+            allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+        }
+    }
+}
