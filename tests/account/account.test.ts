@@ -1,5 +1,4 @@
 // tests/account/account.spec.ts
-
 import { test, expect } from "@playwright/test";
 
 test.describe("validate standard user account", () => {
