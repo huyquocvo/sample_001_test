@@ -6,7 +6,6 @@ test.describe("validate standard user account", () => {
   test("validate standard user account", async ({ page }) => {
     await page.goto('/inventory.html');
     await expect(page.getByRole('button', { name: 'Open Menu' })).toBeVisible();
-    
   });
 });
 
