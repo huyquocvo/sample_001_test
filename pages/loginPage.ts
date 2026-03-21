@@ -12,6 +12,7 @@ constructor(private readonly page: Page)
     this.txtPassword = this.page.getByTestId("password");
     this.btnLogin = this.page.getByTestId("login-button");
     }
+    
   async goto() 
   {
       await this.page.goto("/");
