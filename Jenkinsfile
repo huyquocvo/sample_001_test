@@ -3,6 +3,16 @@ pipeline {
     environment {
         // Set environment variables directly
         BASE_URL = 'https://www.saucedemo.com'
+        STANDARD_USER = 'standard_user'
+        STANDARD_PASSWORD = 'secret_sauce'
+        PROBLEM_USER = 'problem_user'
+        PROBLEM_PASSWORD = 'secret_sauce'
+        PERFORMANCE_GLITCH_USER = 'performance_glitch_user'
+        PERFORMANCE_GLITCH_PASSWORD = 'secret_sauce'
+        ERROR_USER = 'error_user'
+        ERROR_PASSWORD = 'secret_sauce'
+        VISUAL_USER = 'visual_user'
+        VISUAL_PASSWORD = 'secret_sauce'
         // Access existing Jenkins built-in variables
         
     }
