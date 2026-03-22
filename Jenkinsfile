@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         // Set environment variables directly
-        BASE_URL = 'https://www.saucedemo.com'
+        BASE_URL = 'https://www.saucedemo.com1'
         // Access existing Jenkins built-in variables
         
     }
