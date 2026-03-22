@@ -1,5 +1,11 @@
 pipeline {
     agent any
+    environment {
+        // Set environment variables directly
+        BASE_URL = 'https://www.saucedemo.com'
+        // Access existing Jenkins built-in variables
+        
+    }
     tools { nodejs "NodeJS 25" }
     stages {
         stage('Install Dependencies') {
